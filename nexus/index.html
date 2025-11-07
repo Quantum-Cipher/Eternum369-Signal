@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternum Nexus | Enlightened Metrics Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        /* Chosen Palette: Energetic & Playful (Teal, Electric Blue, Yellow Accent) */
+        :root {
+            --nexus-teal: #0A9396;
+            --nexus-blue: #005F73;
+            --nexus-yellow: #EE9B00;
+            --nexus-bg-dark: #01161E;
+        }
+
+        body {
+            background-color: var(--nexus-bg-dark);
+            color: #E5E7EB;
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(at top, rgba(10, 147, 150, 0.15), transparent 70%);
+        }
+        
+        .card {
+            background: var(--nexus-blue);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(10, 147, 150, 0.2);
+            border: 1px solid rgba(10, 147, 150, 0.5);
+        }
+
+        .kpi-card {
+            background: var(--nexus-teal);
+            box-shadow: 0 0 20px rgba(238, 155, 0, 0.6);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            color: var(--nexus-bg-dark);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    
+    <header class="text-center py-12 px-4">
+        <h1 class="text-5xl font-extrabold text-nexus-yellow tracking-tight">
+            Eternum Nexus Infographic
+        </h1>
+        <p class="mt-2 text-xl text-nexus-teal font-medium">Visualizing Enlightened Wealth & Consciousness Flow</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="introduction" class="mb-12">
+            <h2 class="text-3xl font-bold text-nexus-yellow mb-4">The Veil Lifts: Nexus Performance Overview</h2>
+            <p class="text-gray-300 max-w-4xl mx-auto">
+                The Eternum Liquidity Nexus operates on metrics beyond typical DeFi KPIs. We track **Consciousness Flow** (Total Value Locked equivalent) and **Spiritual Alignment Ratio** to measure not just capital efficiency, but adherence to our core mission of supporting Blockchain Neuroplasticity. The data below synthesizes the spiritual and the statistical, offering a transparent view of the protocol's health and its trajectory toward global impact.
+            </p>
+        </section>
+
+        <!-- Kicker Stat -->
+        <div class="mb-12 md:col-span-2">
+            <div class="kpi-card text-center">
+                <p class="text-2xl font-semibold mb-2">Total Cycle Revenue Generated (Last 30 Days)</p>
+                <h3 class="text-7xl font-extrabold">$1.2 M</h3>
+                <p class="mt-2 text-lg italic font-medium">All revenue automatically routes to the decentralized community grant pool for Neurogenesis Research.</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Consciousness Flow Chart -->
+            <div class="card rounded-2xl p-6 flex flex-col">
+                <h3 class="text-2xl font-bold text-nexus-yellow mb-4">Consciousness Flow (TVL Equivalent)</h3>
+                <p class="text-sm text-gray-400 mb-6">
+                    This metric tracks the quarterly growth of all spiritual and financial assets flowing through the Nexus. A continuous upward trend confirms increasing community trust and liquidity depth, reducing slippage across the ecosystem.
+                </p>
+                <div class="chart-container flex-grow">
+                    <canvas id="flowChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Spiritual Alignment Ratio Chart -->
+            <div class="card rounded-2xl p-6 flex flex-col">
+                <h3 class="text-2xl font-bold text-nexus-yellow mb-4">Spiritual Alignment Ratio</h3>
+                <p class="text-sm text-gray-400 mb-6">
+                    (Market Cap / Locked Value). A ratio **below 1.5** signifies a highly utility-driven asset, grounded in committed capital rather than speculation. We are tracking a steady convergence to the ideal state.
+                </p>
+                <div class="chart-container flex-grow">
+                    <canvas id="alignmentChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Global Impact Vector (Donut Chart) -->
+            <div class="card rounded-2xl p-6 md:col-span-2 flex flex-col">
+                <h3 class="text-2xl font-bold text-nexus-yellow mb-4">Global Impact Vector: Token B Allocation</h3>
+                <p class="text-sm text-gray-400 mb-6 max-w-4xl">
+                    This distribution shows how the pooled liquidity of **Token B (NeuroToken)** is currently segmented based on its philosophical purpose, reinforcing our mission-first financial architecture. The largest share is dedicated to Planetary Wellness.
+                </p>
+                <div class="chart-container h-[400px]">
+                    <canvas id="impactVectorChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Process Flow: Mycelium Oracle Integration (Structured HTML) -->
+            <div class="card rounded-2xl p-6 md:col-span-2">
+                <h3 class="text-2xl font-bold text-nexus-yellow mb-6 text-center">Mycelium Oracle & Flow Process</h3>
+                <div class="flex flex-col lg:flex-row justify-between items-center text-center space-y-6 lg:space-y-0 lg:space-x-4">
+                    
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center w-full lg:w-1/4">
+                        <div class="w-16 h-16 bg-nexus-teal rounded-full flex items-center justify-center text-2xl font-bold text-nexus-bg-dark mb-2">1</div>
+                        <p class="font-semibold text-lg text-white">Biological Input</p>
+                        <p class="text-xs text-gray-400 mt-1">Custom Spore Data Feeds Price/Route Prediction Engine.</p>
+                    </div>
+                    
+                    <!-- Arrow -->
+                    <div class="text-nexus-yellow text-3xl hidden lg:block">→</div>
+                    <div class="text-nexus-yellow text-3xl block lg:hidden">↓</div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center w-full lg:w-1/4">
+                        <div class="w-16 h-16 bg-nexus-teal rounded-full flex items-center justify-center text-2xl font-bold text-nexus-bg-dark mb-2">2</div>
+                        <p class="font-semibold text-lg text-white">Cosmic Alignment</p>
+                        <p class="text-xs text-gray-400 mt-1">Lunar Yields and Zodiacal Key are factored for optimal timing.</p>
+                    </div>
+                    
+                    <!-- Arrow -->
+                    <div class="text-nexus-yellow text-3xl hidden lg:block">→</div>
+                    <div class="text-nexus-yellow text-3xl block lg:hidden">↓</div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center w-full lg:w-1/4">
+                        <div class="w-16 h-16 bg-nexus-teal rounded-full flex items-center justify-center text-2xl font-bold text-nexus-bg-dark mb-2">3</div>
+                        <p class="font-semibold text-lg text-white">Unstoppable Flow</p>
+                        <p class="text-xs text-gray-400 mt-1">Cross-chain transaction executed via LayerZero/deBridge.</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-sm text-center text-gray-300">
+                    *This process ensures maximum liquidity efficiency and zero slippage, synchronized with biological and cosmic proof.*
+                </p>
+            </div>
+            
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-gray-500">
+        <p class="text-xs">Data integrity verified by the Eternal Alliance. 2025</p>
+    </footer>
+
+    <script>
+        const processLabel = (label) => {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            let currentLine = '';
+            const lines = [];
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) lines.push(currentLine.trim());
+            return lines;
+        };
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            return Array.isArray(label) ? label.join(' ') : label;
+        };
+
+        const chartOptions = {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#E5E7EB' } },
+                tooltip: { callbacks: { title: tooltipTitleCallback } }
+            },
+            scales: {
+                x: { ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } },
+                y: { ticks: { color: '#9CA3AF' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } }
+            }
+        };
+
+        const flowChartCtx = document.getElementById('flowChart').getContext('2d');
+        new Chart(flowChartCtx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 (Inception)', 'Q2 (Growth Phase)', 'Q3 (Expansion)', 'Q4 (Current Peak)'],
+                datasets: [{
+                    label: 'Consciousness Flow (TVL)',
+                    data: [12, 18, 25, 40],
+                    borderColor: '#EE9B00',
+                    backgroundColor: 'rgba(238, 155, 0, 0.2)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                ...chartOptions,
+                scales: {
+                    ...chartOptions.scales,
+                    y: { ...chartOptions.scales.y, title: { display: true, text: 'Millions USD Equivalent', color: '#9CA3AF' } }
+                }
+            }
+        });
+
+        const alignmentChartCtx = document.getElementById('alignmentChart').getContext('2d');
+        const alignmentData = [2.5, 2.2, 2.0, 1.8, 1.6, 1.4];
+        new Chart(alignmentChartCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6 (Current)'],
+                datasets: [{
+                    label: 'Alignment Score',
+                    data: alignmentData,
+                    backgroundColor: alignmentData.map(val => val <= 1.5 ? 'rgba(10, 147, 150, 1)' : 'rgba(238, 155, 0, 0.8)'),
+                    borderColor: alignmentData.map(val => val <= 1.5 ? '#0A9396' : '#EE9B00'),
+                    borderWidth: 1
+                },
+                {
+                    type: 'line',
+                    label: 'Target Goal (1.5)',
+                    data: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+                    borderColor: '#FF0000',
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                ...chartOptions,
+                plugins: { ...chartOptions.plugins, legend: { display: false } },
+                scales: {
+                    ...chartOptions.scales,
+                    y: { ...chartOptions.scales.y, title: { display: true, text: 'Ratio (Lower is Better)', color: '#9CA3AF' }, min: 0 }
+                }
+            }
+        });
+
+        const impactVectorChartCtx = document.getElementById('impactVectorChart').getContext('2d');
+        const impactLabels = [
+            processLabel('Planetary Wellness Initiatives'), 
+            processLabel('Decentralized Governance & Truth'), 
+            processLabel('Consciousness-Aligned Arts & Culture'), 
+            processLabel('Core Nexus Infrastructure')
+        ];
+        new Chart(impactVectorChartCtx, {
+            type: 'doughnut',
+            data: {
+                labels: impactLabels,
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: ['#0A9396', '#EE9B00', '#005F73', '#F9C74F'],
+                    borderColor: 'var(--nexus-bg-dark)',
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: { color: '#E5E7EB', padding: 20 }
+                    },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
