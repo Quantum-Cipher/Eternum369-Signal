@@ -1,5 +1,6 @@
-🪐 ETERNUM369 - The Liquidity Nexus Gateway 🌌
-This repository (Quantum-Cipher/Eternum369-Signal) serves as the Primary Landing Page and Gateway for the entire Eternum Liquidity Nexus ecosystem. Its sole purpose is to onboard users and direct them to the core decentralized applications (dApps) hosted on our dedicated subdomains.
+🪐 ETERNUM369 - The Liquidity Nexus Gateway 
+
+🌌 This repository (Quantum-Cipher/Eternum369-Signal) serves as the Primary Landing Page and Gateway for the entire Eternum Liquidity Nexus ecosystem. Its sole purpose is to onboard users and direct them to the core decentralized applications (dApps) hosted on our dedicated subdomains.
 The main domain (eternum369.com) embodies the vision of Enlightened Wealth—the belief that "weird money is like a spell that casts out spiritual enlightenment."
 
 🚀 Ecosystem Overview
