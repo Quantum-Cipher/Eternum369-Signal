@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternum: The Mycelial Network Blockchain</title>
+    <!-- Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom gradient for a futuristic feel */
+        .bg-gradient-eternum {
+            background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%);
+        }
+        .btn-gradient {
+            background: linear-gradient(45deg, #6366f1, #3b82f6);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        .message-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        .message-box.show {
+            opacity: 1;
+        }
+
+        /* Styles for the chat interface */
+        .chat-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 1rem;
+            border-radius: 1.5rem;
+            max-width: 80%;
+            margin-bottom: 1rem;
+        }
+        .user-message {
+            background-color: #334155;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 0.5rem;
+        }
+        .ai-message {
+            background-color: #1e293b;
+            align-self: flex-start;
+            margin-right: auto;
+            border-bottom-left-radius: 0.5rem;
+        }
+        .loading-dots span {
+            animation: blink 1.4s infinite;
+        }
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        /* Custom SVG diagram for Core Concept */
+        .mycelial-diagram {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- Message Box for user feedback -->
+    <div id="messageBox" class="message-box bg-green-500 text-white"></div>
+
+    <!-- Header & Navigation -->
+    <header class="bg-slate-900 border-b border-slate-700 py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-blue-500">
+                <span>ETERNuM</span>
+            </a>
+            <div id="walletStatusContainer" class="text-right">
+                <button id="connectWalletBtn" class="btn-gradient text-white font-semibold py-2 px-6 rounded-full shadow-lg">
+                    Connect Wallet
+                </button>
+                <div id="walletInfo" class="text-sm text-slate-400 mt-2 hidden">
+                    <p>Status: <span class="text-green-400">Connected</span></p>
+                    <p>Address: <span class="font-mono text-xs" id="walletAddress"></span></p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="bg-gradient-eternum min-h-screen flex items-center justify-center p-4">
+        <div class="container mx-auto max-w-4xl text-center py-20">
+            <h1 class="text-4xl sm:text-6xl font-bold leading-tight text-white mb-6">
+                Mythosblock: Web4 for Incurable Cures
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+                A mission to cure ALS through mycelial research, powered by a decentralized, AI-infused blockchain inspired by nature's most efficient networks. This is not just technology; it's a new vision for a healthier future.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#core-concept" class="btn-gradient text-white font-semibold py-3 px-8 rounded-full text-lg shadow-xl hover:shadow-2xl">
+                    Discover the Vision
+                </a>
+                <a href="#ai-chat" class="bg-slate-700 text-slate-300 font-semibold py-3 px-8 rounded-full text-lg border border-slate-600 shadow-lg transition-colors hover:bg-slate-600">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Core Concept Section -->
+    <section id="core-concept" class="py-20 bg-slate-900">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl sm:text-5xl font-bold text-center text-white mb-12">
+                Mycelium, Neurology, and Mythosblock
+            </h2>
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="text-slate-300 text-base sm:text-lg space-y-6">
+                    <p>
+                        The core of Eternum is the revolutionary idea that the decentralized networks of **mycelium** and the human **neurological system** share profound parallels. Both are masterfully efficient at processing information, adapting to their environment, and allocating resources without a central command.
+                    </p>
+                    <p>
+                        This is the blueprint for **Mythosblock**, a blockchain that doesn't just record transactions—it finds the most efficient pathways for data, evolves its own structure based on usage, and autonomously funds critical research using an **AI-infused resource model**.
+                    </p>
+                </div>
+                <!-- Simple Diagram using structured HTML/CSS -->
+                <div class="flex flex-col items-center justify-center space-y-4">
+                    <div class="flex justify-around w-full max-w-sm">
+                        <div class="w-20 h-20 rounded-full bg-blue-500 flex items-center justify-center text-xl font-bold">AI</div>
+                        <div class="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center text-xl font-bold">Mycelial</div>
+                        <div class="w-20 h-20 rounded-full bg-indigo-500 flex items-center justify-center text-xl font-bold">Neural</div>
+                    </div>
+                    <div class="w-4/5 h-1 bg-slate-700 rounded-full my-4"></div>
+                    <p class="text-indigo-400 font-semibold text-center">Interconnected Systems Model</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Pair Creation Section -->
+    <section id="key-pairs" class="py-20 bg-slate-800">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl sm:text-5xl font-bold text-white mb-6">
+                Forge Your Digital Identity
+            </h2>
+            <p class="text-lg text-slate-300 mb-12 max-w-2xl mx-auto">
+                Eternum's secure, watermarked key pairs are your entry into the network. You can either build your own or have one generated for you.
+            </p>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Option 1: Build Your Own -->
+                <div class="bg-slate-700 p-8 rounded-2xl shadow-xl border border-slate-600 flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Build Your Own Key</h3>
+                    <p class="text-slate-400 mb-6 flex-grow">
+                        For developers and enthusiasts. Use our open-source tools and your own computing power to generate your unique, secure key pair.
+                    </p>
+                    <button id="buildKeyBtn" class="bg-slate-500 text-white font-semibold py-3 px-8 rounded-full w-full transition-colors hover:bg-slate-400">
+                        Build Your Own Key
+                    </button>
+                </div>
+                <!-- Option 2: Pay for a Key Pair -->
+                <div class="bg-slate-700 p-8 rounded-2xl shadow-xl border border-slate-600 flex flex-col items-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Pay for a Key Pair</h3>
+                    <p class="text-slate-400 mb-6 flex-grow">
+                        For a simpler, automated experience. We'll generate a hardened, secure key pair for you, ready for use on the network.
+                    </p>
+                    <button id="payKeyBtn" class="btn-gradient text-white font-semibold py-3 px-8 rounded-full w-full">
+                        Pay for a Key Pair
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oracle-powered Live Research Feed -->
+    <section id="research-feed" class="py-20 bg-slate-900">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl sm:text-5xl font-bold text-white mb-6">
+                Live Research Feed
+            </h2>
+            <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+                Powered by a decentralized **oracle**, this feed provides a real-time, transparent window into the latest breakthroughs in mycelial research funded by Eternum.
+            </p>
+            <div class="bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-6">
+                <ul id="researchList" class="text-left space-y-4 text-slate-300 font-mono">
+                    <!-- Data will be dynamically added here by JavaScript -->
+                    <li class="p-4 rounded-xl bg-slate-700 text-center">
+                        <span id="oracle-loading" class="loading-dots">
+                            <span>.</span><span>.</span><span>.</span>
+                        </span>
+                        Loading live data...
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Chat Section -->
+    <section id="ai-chat" class="py-20 bg-slate-900">
+        <div class="container mx-auto px-4 max-w-2xl">
+            <h2 class="text-3xl sm:text-5xl font-bold text-center text-white mb-6">
+                Explore with Our AI
+            </h2>
+            <p class="text-lg text-slate-300 text-center mb-8">
+                Ask our Gemini-powered AI any questions about the Eternum vision, mycelial research, or the future of Web4.
+            </p>
+            <div class="bg-slate-800 rounded-2xl shadow-lg border border-slate-700 p-6 flex flex-col h-[500px]">
+                <div id="chatHistory" class="chat-container flex-grow flex flex-col p-4 space-y-4">
+                    <div class="message ai-message">
+                        Hello! I'm here to help you learn more about Eternum. What would you like to know?
+                    </div>
+                </div>
+                <div class="flex items-center mt-4 space-x-4">
+                    <input type="text" id="chatInput" placeholder="Ask me anything..." class="flex-grow bg-slate-700 text-white border border-slate-600 rounded-full py-3 px-6 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button id="sendChatBtn" class="btn-gradient text-white font-semibold py-3 px-6 rounded-full shadow-lg">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gemini Concept to Code Section -->
+    <section id="ai-code" class="py-20 bg-slate-800">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl sm:text-5xl font-bold text-white mb-6">
+                Concept to Code ✨
+            </h2>
+            <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+                Describe a simple UI component in plain English, and our AI will generate the code.
+            </p>
+            <div class="bg-slate-700 rounded-2xl shadow-lg border border-slate-600 p-6 flex flex-col">
+                <textarea id="codePrompt" placeholder="e.g., 'a purple button with rounded corners and a shadow'" rows="4" class="w-full bg-slate-600 text-white border border-slate-500 rounded-xl p-4 mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <button id="generateCodeBtn" class="btn-gradient text-white font-semibold py-3 px-8 rounded-full shadow-lg mb-6">
+                    Generate Code
+                </button>
+                <pre id="codeOutput" class="bg-slate-900 text-green-300 rounded-lg p-4 text-left overflow-auto text-sm hidden">
+                    <!-- Generated code will appear here -->
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-900 py-8 text-center text-slate-500 border-t border-slate-700">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Eternum. All rights reserved.</p>
+            <p class="mt-2 text-sm">
+                Built on the foundation of the <span class="text-indigo-400">Swift CLI Ethereum wallet</span>.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // --- API & BACKEND CONFIG ---
+        // IMPORTANT: Update this URL to point to your actual backend server endpoints.
+        const BACKEND_API_URL = 'http://localhost:3000'; 
+        const API_KEY = ""; // Kept empty for Canvas environment
+
+        let isWalletConnected = false;
+        
+        // Utility function to display a temporary message (replaces alert/confirm)
+        function showMessage(message, duration = 3000, isError = false) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.textContent = message;
+            messageBox.classList.remove('bg-green-500', 'bg-red-500');
+            messageBox.classList.add(isError ? 'bg-red-500' : 'bg-green-500', 'show');
+            
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, duration);
+        }
+
+        // --- 1. WALLET CONNECTION LOGIC ---
+        document.getElementById('connectWalletBtn').addEventListener('click', () => {
+            if (isWalletConnected) {
+                showMessage('Wallet is already connected!', 3000);
+                return;
+            }
+
+            const connectBtn = document.getElementById('connectWalletBtn');
+            const walletInfo = document.getElementById('walletInfo');
+            
+            connectBtn.textContent = 'Connecting...';
+            connectBtn.classList.add('animate-pulse');
+
+            // Simulate the connection process and fetch a mock address
+            setTimeout(() => {
+                const mockAddress = '0x' + Math.random().toString(16).slice(2, 42); 
+                document.getElementById('walletAddress').textContent = mockAddress;
+                
+                isWalletConnected = true;
+                connectBtn.textContent = 'Connected';
+                connectBtn.classList.remove('btn-gradient', 'animate-pulse');
+                connectBtn.classList.add('bg-green-600', 'cursor-not-allowed');
+                walletInfo.classList.remove('hidden');
+                
+                showMessage('Wallet connected successfully!', 3000);
+            }, 1500);
+        });
+
+        // --- 2. ORACLE LIVE RESEARCH FEED ---
+        const researchList = document.getElementById('researchList');
+        
+        // Mock function to simulate fetching structured data from a backend Oracle
+        async function fetchOracleData() {
+            researchList.innerHTML = `<li class="p-4 rounded-xl bg-slate-700 text-center">
+                                         <span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+                                         Loading live data...
+                                      </li>`;
+
+            try {
+                // *** Placeholder for actual backend call to /api/oracle ***
+                // This would return an array of research objects (id, title, value)
+                // const response = await fetch(`${BACKEND_API_URL}/api/oracle`);
+                // const data = await response.json();
+                
+                // Mock Data for Demo
+                const data = [
+                    { id: 105, title: 'Mycelial Pathway Efficiency', value: '98.7% Operational Capacity' },
+                    { id: 104, title: 'ALS Neurogenesis Funding', value: '$1.2M Allocated This Cycle' },
+                    { id: 103, title: 'AI Block Routing Adaptation', value: '4.5% Structure Evolution Rate' },
+                    { id: 102, title: 'Quantum Entanglement Proof', value: 'Verified 99.99% Node Synchronization' }
+                ];
+
+                researchList.innerHTML = ''; // Clear loading message
+
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <div class="flex justify-between items-center bg-slate-700 rounded-xl p-4 transition-all duration-300 ease-in-out hover:bg-slate-600">
+                            <div>
+                                <span class="text-sm text-indigo-400">#${item.id}</span>
+                                <p class="font-bold text-white">${item.title}</p>
+                                <p class="text-sm text-slate-400">${item.value}</p>
+                            </div>
+                            <button class="text-xs px-3 py-1 rounded-full font-semibold bg-indigo-500 text-white explain-btn" data-title="${item.title}" data-value="${item.value}">
+                                Explain
+                            </button>
+                        </div>
+                    `;
+                    researchList.prepend(li);
+                });
+
+                document.querySelectorAll('.explain-btn').forEach(button => {
+                    button.addEventListener('click', async (event) => {
+                        const title = event.target.dataset.title;
+                        const value = event.target.dataset.value;
+                        const explanation = await getGeminiResponse(`Explain the following research finding in simple terms: ${title}, with the value ${value}.`, true);
+                        showMessage(explanation, 8000);
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error fetching oracle data:', error);
+                researchList.innerHTML = `<li class="p-4 rounded-xl bg-slate-700 text-center text-red-400">
+                                            Failed to load research data. Check backend API URL.
+                                         </li>`;
+            }
+        }
+        
+        // Fetch data initially and then every 30 seconds
+        fetchOracleData();
+        setInterval(fetchOracleData, 30000);
+
+        // --- 3. GEMINI AI CHATBOT LOGIC (Uses same backend as Oracle explain button) ---
+        const chatHistoryDiv = document.getElementById('chatHistory');
+        const chatInput = document.getElementById('chatInput');
+        const sendChatBtn = document.getElementById('sendChatBtn');
+        let chatHistory = [{ role: "model", parts: [{ text: "Hello! I'm here to help you learn more about Eternum. What would you like to know?" }] }];
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', isUser ? 'user-message' : 'ai-message');
+            messageDiv.textContent = text;
+            chatHistoryDiv.appendChild(messageDiv);
+            chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
+        }
+
+        function showLoading() {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = 'loading';
+            loadingDiv.classList.add('message', 'ai-message', 'loading-dots');
+            loadingDiv.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+            chatHistoryDiv.appendChild(loadingDiv);
+            chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
+        }
+
+        function hideLoading() {
+            const loadingDiv = document.getElementById('loading');
+            if (loadingDiv) loadingDiv.remove();
+        }
+
+        async function getGeminiResponse(prompt, isExplanation = false) {
+            const backendApiUrl = `${BACKEND_API_URL}/api/gemini`; 
+            
+            // For explanations, we don't need chat history
+            let currentHistory = isExplanation ? [{ role: "user", parts: [{ text: prompt }] }] : [...chatHistory, { role: "user", parts: [{ text: prompt }] }];
+            
+            const payload = { contents: currentHistory, systemInstruction: {parts: [{ text: "You are the helpful, visionary AI assistant for the Eternum Mythosblock project, specializing in mycelial and neurological research concepts. Keep answers concise." }]} };
+
+            try {
+                const response = await fetch(backendApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const result = await response.json();
+                const text = result?.text;
+                
+                if (text) {
+                    if (!isExplanation) {
+                        chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                        chatHistory.push({ role: "model", parts: [{ text: text }] });
+                    }
+                    return text;
+                } else {
+                    return "Sorry, I couldn't get a concise response.";
+                }
+
+            } catch (error) {
+                console.error('Error communicating with backend:', error);
+                return "There was an error communicating with the AI. Please check your backend connection.";
+            }
+        }
+
+        async function handleChat() {
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+
+            addMessage(userMessage, true);
+            chatInput.value = '';
+            showLoading();
+
+            try {
+                const aiResponse = await getGeminiResponse(userMessage, false);
+                hideLoading();
+                addMessage(aiResponse, false);
+            } catch (error) {
+                hideLoading();
+                addMessage("There was an error processing your request.", false);
+            }
+        }
+
+        sendChatBtn.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleChat();
+            }
+        });
+        
+        // --- 4. GEMINI CONCEPT TO CODE LOGIC ---
+        const codePrompt = document.getElementById('codePrompt');
+        const generateCodeBtn = document.getElementById('generateCodeBtn');
+        const codeOutput = document.getElementById('codeOutput');
+        
+        async function generateCode() {
+            const prompt = codePrompt.value.trim();
+            if (!prompt) {
+                showMessage('Please enter a description for the code.', 3000, true);
+                return;
+            }
+            
+            generateCodeBtn.textContent = 'Generating...';
+            generateCodeBtn.disabled = true;
+            codeOutput.textContent = 'Generating code...';
+            codeOutput.classList.remove('hidden');
+
+            const backendApiUrl = `${BACKEND_API_URL}/api/gemini`;
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{
+                        text: `Generate HTML and Tailwind CSS for a simple, single, self-contained UI component based on this description: "${prompt}".
+                        Provide only the code block. Do not include any extra text, explanations, or backticks outside of the code block. Use only a single HTML file.`
+                    }]
+                }]
+            };
+
+            try {
+                const response = await fetch(backendApiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const result = await response.json();
+                const generatedText = result.text.trim();
+                
+                const codeBlock = generatedText.substring(generatedText.indexOf('```') + 3, generatedText.lastIndexOf('```')).trim();
+                
+                codeOutput.textContent = codeBlock;
+
+            } catch (error) {
+                console.error('Error generating code:', error);
+                codeOutput.textContent = 'Error: Failed to generate code.';
+            } finally {
+                generateCodeBtn.textContent = 'Generate Code';
+                generateCodeBtn.disabled = false;
+            }
+        }
+        
+        generateCodeBtn.addEventListener('click', generateCode);
+    </script>
+</body>
+</html>
+
+
