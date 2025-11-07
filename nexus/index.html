@@ -110,7 +110,7 @@
             <div class="card rounded-2xl p-6 md:col-span-2 flex flex-col">
                 <h3 class="text-2xl font-bold text-nexus-yellow mb-4">Global Impact Vector: Token B Allocation</h3>
                 <p class="text-sm text-gray-400 mb-6 max-w-4xl">
-                    This distribution shows how the pooled liquidity of **Token B (NeuroToken)** is currently segmented based on its philosophical purpose, reinforcing our mission-first financial architecture. The largest share is dedicated to Planetary Wellness.
+                    This distribution shows how the pooled liquidity of **Token B (NeuroToken)** is currently segmented based on its philosophical purpose, **prioritizing urgent neurological research**. This reinforces our mission-first financial architecture.
                 </p>
                 <div class="chart-container h-[400px]">
                     <canvas id="impactVectorChart"></canvas>
@@ -259,15 +259,17 @@
             processLabel('Planetary Wellness Initiatives'), 
             processLabel('Decentralized Governance & Truth'), 
             processLabel('Consciousness-Aligned Arts & Culture'), 
-            processLabel('Core Nexus Infrastructure')
+            processLabel('Core Nexus Infrastructure'),
+            processLabel('Neurological Research (ALS #savedan)')
         ];
         new Chart(impactVectorChartCtx, {
             type: 'doughnut',
             data: {
                 labels: impactLabels,
                 datasets: [{
-                    data: [40, 30, 20, 10],
-                    backgroundColor: ['#0A9396', '#EE9B00', '#005F73', '#F9C74F'],
+                    // Updated data: 30% Wellness, 30% Governance, 15% Arts, 10% Infrastructure, 15% Neurological Research
+                    data: [30, 30, 15, 10, 15],
+                    backgroundColor: ['#0A9396', '#EE9B00', '#005F73', '#F9C74F', '#FF4E50'],
                     borderColor: 'var(--nexus-bg-dark)',
                     borderWidth: 4
                 }]
