@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternum Swap Hub - The Liquidity Nexus</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Energetic & Playful Palette (Teal, Electric Blue, Yellow Accent)
+                        'nexus-teal': '#0A9396', // Primary Color
+                        'nexus-blue': '#005F73', // Background/Darker Shade
+                        'nexus-yellow': '#EE9B00', // Accent/Highlight
+                        'nexus-light-yellow': '#F9C74F',
+                        'nexus-bg-dark': '#01161E', // Very dark background
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            background-color: theme('colors.nexus-bg-dark');
+            background-image: linear-gradient(135deg, theme('colors.nexus-bg-dark') 0%, theme('colors.nexus-blue') 100%);
+        }
+        .swap-card-glow {
+            box-shadow: 0 0 30px rgba(10, 147, 150, 0.4);
+        }
+        .glass-panel {
+            background: rgba(1, 22, 30, 0.7); /* Darker transparent blue */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        /* Hide number input arrows */
+        input[type="number"]::-webkit-inner-spin-button, 
+        input[type="number"]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-md">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-extrabold text-nexus-yellow tracking-wider font-mono">ET-SWAP</h1>
+            <p class="text-md text-gray-400 mt-2">The Bridging Hub of Enlightened Wealth</p>
+        </header>
+
+        <!-- Swap Widget Card -->
+        <div class="glass-panel swap-card-glow border border-nexus-teal/40 rounded-3xl p-6 md:p-8 space-y-5">
+            
+            <!-- Input Card 1 (Token A - FROM) -->
+            <div class="bg-nexus-blue/50 p-4 rounded-xl border border-nexus-teal/30 shadow-lg">
+                <label class="text-sm font-medium text-gray-300 block mb-1">From (Pay)</label>
+                <div class="flex items-center space-x-3">
+                    <input type="number" id="fromAmount" placeholder="0.0" value="1000" class="w-full bg-transparent text-3xl font-bold text-white focus:outline-none placeholder-gray-500 appearance-none p-0" oninput="calculateSwap()">
+                    <button class="flex items-center space-x-2 bg-nexus-teal hover:bg-nexus-teal/80 transition-colors text-white font-semibold py-2 px-4 rounded-xl text-lg">
+                        <span role="img" aria-label="token a icon">💰</span>
+                        <span class="hidden sm:inline">ET Token</span>
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Swap Direction Button -->
+            <div class="flex justify-center -my-2">
+                <button onclick="toggleTokens()" class="p-3 bg-nexus-yellow rounded-full text-nexus-bg-dark shadow-xl hover:shadow-2xl transition duration-300 transform hover:scale-105 border-2 border-white/50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m12 0l4 4m-4-4l-4 4"></path></svg>
+                </button>
+            </div>
+
+            <!-- Input Card 2 (Token B - TO) -->
+            <div class="bg-nexus-blue/50 p-4 rounded-xl border border-nexus-teal/30 shadow-lg">
+                <label class="text-sm font-medium text-gray-300 block mb-1">To (Receive)</label>
+                <div class="flex items-center space-x-3">
+                    <input type="number" id="toAmount" placeholder="0.0" readonly class="w-full bg-transparent text-3xl font-bold text-nexus-yellow focus:outline-none placeholder-gray-500 appearance-none p-0">
+                    <button class="flex items-center space-x-2 bg-nexus-teal hover:bg-nexus-teal/80 transition-colors text-white font-semibold py-2 px-4 rounded-xl text-lg">
+                        <span role="img" aria-label="token b icon">🧬</span>
+                        <span class="hidden sm:inline">NeuroToken</span>
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Transaction Details -->
+            <div class="text-sm space-y-3 pt-3">
+                <div class="flex justify-between text-gray-400">
+                    <span>Exchange Rate:</span> 
+                    <span id="exchangeRate" class="text-white font-mono">1 ET ≈ 1.25 NT</span>
+                </div>
+                <div class="flex justify-between text-gray-400">
+                    <span>Slippage Tolerance:</span> 
+                    <span class="text-nexus-yellow font-semibold">0.5%</span>
+                </div>
+                <div class="flex justify-between text-gray-400">
+                    <span>Projected Flow Fee:</span> 
+                    <span class="text-nexus-teal font-semibold">0.05%</span>
+                </div>
+            </div>
+
+            <!-- Connect/Swap Button -->
+            <button id="mainSwapButton" onclick="handleSwapAction()" class="mt-6 w-full py-4 bg-nexus-yellow text-nexus-bg-dark font-extrabold text-xl rounded-xl shadow-lg hover:bg-nexus-light-yellow transition duration-300 transform hover:scale-[1.02]">
+                Connect Wallet
+            </button>
+
+            <footer class="text-center pt-3 text-xs text-gray-500 italic">
+                Powered by the Mycelium Oracle. Always check the flow.
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripting for Swap Logic and UI -->
+    <script>
+        const fromAmountInput = document.getElementById('fromAmount');
+        const toAmountInput = document.getElementById('toAmount');
+        const exchangeRateDisplay = document.getElementById('exchangeRate');
+        const mainSwapButton = document.getElementById('mainSwapButton');
+        
+        let tokenA = 'ET Token';
+        let tokenB = 'NeuroToken';
+        let rate = 1.25; // 1 ET = 1.25 NT
+
+        const calculateSwap = () => {
+            let amountA = parseFloat(fromAmountInput.value) || 0;
+            let amountB = amountA * rate;
+            toAmountInput.value = amountB.toFixed(4);
+        };
+
+        const updateUI = () => {
+            exchangeRateDisplay.textContent = `1 ${tokenA.split(' ')[0]} ≈ ${rate} ${tokenB.split(' ')[0]}`;
+            calculateSwap();
+        };
+
+        const toggleTokens = () => {
+            // Swap token names and update the rate (1/rate)
+            [tokenA, tokenB] = [tokenB, tokenA];
+            rate = 1 / rate;
+            
+            // Swap button texts (simple DOM manipulation for this demo)
+            const btnA = fromAmountInput.nextElementSibling;
+            const btnB = toAmountInput.nextElementSibling;
+
+            const iconA = btnA.querySelector('span[role="img"]').textContent;
+            const labelA = btnA.querySelector('span:not([role="img"])');
+            
+            const iconB = btnB.querySelector('span[role="img"]').textContent;
+            const labelB = btnB.querySelector('span:not([role="img"])');
+            
+            // Perform the visual swap
+            btnA.querySelector('span[role="img"]').textContent = iconB;
+            labelA.textContent = tokenA;
+
+            btnB.querySelector('span[role="img"]').textContent = iconA;
+            labelB.textContent = tokenB;
+            
+            updateUI();
+        };
+
+        const handleSwapAction = () => {
+            if (mainSwapButton.textContent === 'Connect Wallet') {
+                // In a real application, this would initiate a Web3 connection.
+                alert('Initiating Wallet Connection (Placeholder).');
+                mainSwapButton.textContent = 'SWAP FLOW';
+                mainSwapButton.classList.remove('bg-nexus-yellow', 'hover:bg-nexus-light-yellow');
+                mainSwapButton.classList.add('bg-nexus-teal', 'hover:bg-nexus-teal/80', 'text-white');
+            } else {
+                // In a real application, this would execute the swap transaction.
+                const amount = parseFloat(fromAmountInput.value);
+                if (amount > 0) {
+                    alert(`Initiating ${amount} ${tokenA} to ${tokenB} swap... (Placeholder)`);
+                } else {
+                    alert('Please enter a valid amount to swap.');
+                }
+            }
+        };
+
+        // Initialize display and placeholder values
+        updateUI();
+    </script>
+</body>
+</html>
+
+
