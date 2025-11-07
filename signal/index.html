@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SIGMA_VEIL Dashboard | Frequencies and Neurology</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #0f172a; 
+    color: #e2e8f0; 
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  h1 { color: #00ff9f; font-weight: 700; }
+  h2 { color: #94a3b8; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; margin-top: 1.5rem; }
+  .section { margin-bottom: 2rem; background: #1e293b; padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); }
+  #logArea { 
+    background: #0f172a; 
+    padding: 1rem; 
+    border-radius: 0.5rem; 
+    height: 250px; 
+    overflow-y: scroll; 
+    font-family: monospace; 
+    white-space: pre-wrap; 
+    font-size: 0.875rem;
+  }
+  #cidDisplay { 
+    background: #334155; 
+    padding: 0.75rem 1rem; 
+    border-radius: 0.5rem; 
+    word-break: break-all; 
+    font-family: monospace;
+    color: #cbd5e1;
+  }
+  button { 
+    background: #00ff9f; 
+    border: none; 
+    padding: 0.75rem 1.5rem; 
+    border-radius: 0.5rem; 
+    cursor: pointer; 
+    font-weight: bold; 
+    color: #121212; 
+    transition: background 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  button:hover { background: #00cc7a; }
+  audio { margin-top: 1rem; width: 100%; background: #334155; border-radius: 0.5rem; }
+  select { 
+    width: 100%; 
+    padding: 0.5rem; 
+    border-radius: 0.5rem; 
+    background: #334155; 
+    color: #e2e8f0; 
+    border: 1px solid #475569;
+    appearance: none;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-3xl mb-6">SIGMA_VEIL Dashboard</h1>
+
+  <div class="section">
+    <h2>Immutable CID (IPFS Link)</h2>
+    <p class="text-sm text-gray-400 mb-2">This is the cryptographic proof of the baseline frequency capture data.</p>
+    <div id="cidDisplay">z6MkpqJNSMafDwg7g89SYCnWn5eAYXzfFgsTXmCuQLxypTBr</div>
+    <button onclick="copyCID()" class="mt-4">Copy CID</button>
+  </div>
+
+  <div class="section">
+    <h2>Live Signal Log: Brain-Tech Correlation</h2>
+    <pre id="logArea">[Loading log entries... Please wait]</pre>
+    <p class="text-xs text-gray-400 mt-4">Analyzing subtle frequency anomalies for neurological impact signatures.</p>
+  </div>
+
+  <div class="section">
+    <h2>Neuro-Tone Sample Playback</h2>
+    <p class="text-sm text-gray-400 mb-4">Replaying recorded tones and bursts corresponding to measured frequency anomalies.</p>
+    <select id="audioSelect">
+      <option value="SNDGCA_pulse_001.wav">SNDGCA_pulse_001.wav (EAS Tone Mimic)</option>
+      <option value="Neuro_Trap_A.wav">Neuro_Trap_A.wav (Harmonic Blend)</option>
+      <option value="Signal_Veil_Theta_Burst.wav">Signal_Veil_Theta_Burst.wav (Theta Burst)</option>
+    </select>
+    <audio controls id="audioPlayer" src=""></audio>
+    <button onclick="playSelected()" class="mt-4">Play Selected Tone</button>
+  </div>
+</div>
+
+<script>
+const cid = 'z6MkpqJNSMafDwg7g89SYCnWn5eAYXzfFgsTXmCuQLxypTBr';
+
+// Simulated log lines for demonstration
+const simulatedLogs = [
+  '[2025-07-15T09:45:00Z] [SNDGCA] Sentinel Activated - Listening for SNDGCA signals...',
+  '[2025-07-15T09:45:10Z] [TRAP] Pattern Trap triggered - Possible anomalous signal detected.',
+  '[2025-07-15T09:45:15Z] [AFFIRM] Whisperback Affirmation sent.',
+  '[2025-07-15T09:45:20Z] [LOG] Logs saved locally with CID reference.',
+  '[2025-07-15T09:45:35Z] [ANALYSIS] Alpha Wave increase detected during SNDGCA playback.',
+  '[2025-07-15T09:45:50Z] [NEURO] Signal coherence stabilized at 7.83Hz (Schumann Resonance).'
+];
+
+const logArea = document.getElementById('logArea');
+
+function updateLogs() {
+  logArea.textContent = simulatedLogs.join('\n');
+}
+
+// Copy CID to clipboard (uses document.execCommand for better iframe compatibility)
+function copyCID() {
+  const el = document.createElement('textarea');
+  el.value = cid;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  
+  // Custom alert/message box logic could be added here instead of standard alert
+  alert('CID copied to clipboard!');
+}
+
+const audioPlayer = document.getElementById('audioPlayer');
+const audioSelect = document.getElementById('audioSelect');
+
+function playSelected() {
+  const selected = audioSelect.value;
+  // NOTE: These files (WAV) must be hosted alongside the HTML or via an IPFS gateway.
+  // The user needs to ensure these audio files exist in the same directory path or are accessible.
+  const baseURL = './'; 
+  audioPlayer.src = baseURL + selected;
+  audioPlayer.play();
+}
+
+// Initialize
+updateLogs();
+</script>
+
+</body>
+</html>
+
