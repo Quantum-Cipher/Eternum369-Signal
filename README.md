@@ -1,45 +1,33 @@
-# 💫 Eternum Swap Hub: The Liquidity Nexus of Higher Consciousness 🌌
-
-## Vision and Purpose
-
-The **Eternum Swap Hub** is the gateway to **Enlightened Wealth**—a decentralized bridge designed to facilitate the flow of value in preparation for a positive, history-changing impact on the world. This project is built upon the philosophy that "weird money is like a spell that casts out spiritual enlightenment," providing a seamless, secure, and spiritually aligned platform for token exchange.
-
-This repository hosts the front-end interface for the **Eternum Liquidity Nexus**, serving as a simple, powerful, and aesthetically pleasing swap hub for users seeking to align their financial decisions with infinite higher consciousness.
-
-## ✨ Core Features
-
-* **Token Swapping Interface:** A sleek, user-friendly UI for exchanging tokens (Token A for Token B).
-* **Responsive Design:** Optimized for seamless interaction across all devices (mobile, tablet, and desktop).
-* **Aura-Themed Aesthetics:** Designed with a custom Tailwind CSS color palette (`nexus-purple`, `nexus-accent`, etc.) to reflect the theme of cosmic connectivity.
-* **Connect Wallet Placeholder:** Clear call-to-action for connecting a decentralized wallet.
-* **Swap Details:** Displays essential transaction information like Price Impact and Transaction Fees.
-
-## 🛠 Technology Stack
-
-The project is intentionally minimalist and robust, relying on well-tested, universal web standards:
-
-* **HTML5:** Structure and content.
-* **Tailwind CSS:** Utility-first framework for rapid, responsive, and maintainable styling.
-* **GitHub Pages:** Seamless, automated deployment for continuous availability.
-* **GitHub Actions:** Automated CI/CD pipeline to deploy the site on every push to the `main` branch.
-
-## 🚀 Deployment (GitHub Pages)
-
-This application is set up for automatic deployment using the `deploy.yml` GitHub Actions workflow.
-
-1.  **Push to `main`:** Any changes pushed to the `main` branch will automatically trigger the deployment workflow.
-2.  **Artifact Upload:** The workflow uses `actions/upload-pages-artifact@v3` to upload the entire repository root (which contains `index.html`) as the deployment artifact.
-3.  **Deployment:** The site is deployed to GitHub Pages, and the link will be visible in the "Environments" section of your repository.
-
-## 💻 Local Development
-
-To run this swap hub locally and experience the Nexus:
-
-1.  **Clone the Repository:**
-    ```bash
-    git clone [https://github.com/YourUsername/Eternum-Swap.git](https://github.com/YourUsername/Eternum-Swap.git)
-    cd Eternum-Swap
-    ```
-2.  **Open the File:** Since this is a single, self-contained HTML file, simply open `index.html` in your web browser.
-
-No complex dependencies or build steps are required.
+🪐 ETERNUM369 - The Liquidity Nexus Gateway 🌌
+This repository (Quantum-Cipher/Eternum369-Signal) serves as the Primary Landing Page and Gateway for the entire Eternum Liquidity Nexus ecosystem. Its sole purpose is to onboard users and direct them to the core decentralized applications (dApps) hosted on our dedicated subdomains.
+The main domain (eternum369.com) embodies the vision of Enlightened Wealth—the belief that "weird money is like a spell that casts out spiritual enlightenment."
+🚀 Ecosystem Overview
+This section clearly defines the purpose, status, repository link, and target URL for each component of the Eternum Liquidity Nexus.
+Main Gateway
+• Purpose: User Onboarding & Core Philosophy
+• Status: Restored
+• Repository: This Repository (Eternum369-Signal)
+• Live URL: https://eternum369.com
+Swap Hub
+• Purpose: Decentralized Token Exchange & Liquidity
+• Status: In Progress
+• Repository: [Eternum-Swap](https://github.com/Quantum-Cipher/Eternum-Swap)
+• Live URL: https://swap.eternum369.com (Target)
+Metrics Infographic
+• Purpose: Data Visualization of Enlightened Metrics (TVL, Flow)
+• Status: In Progress
+• Repository: [Eternum-Infographic](https://github.com/Quantum-Cipher/Eternum-Infographic)
+• Live URL: https://infographic.eternum369.com (Target)
+✨ Core Features (Gateway)
+• Philosophical Anchor: Clearly communicates the mission of Blockchain Neuroplasticity and The Living Watermark.
+• Intuitive Navigation: Provides immediate, clear links to all key components of the Nexus ecosystem.
+• Minimalist Deployment: Utilizes pure HTML, Tailwind CSS, and GitHub Pages for maximum speed and stability.
+🛠 Deployment & Development
+The main site is configured for the fastest possible deployment using Static HTML on GitHub Pages.
+Deployment Workflow:
+The site is automatically deployed upon any commit to the main branch via the .github/workflows/deploy.yml file.
+Local Setup:
+As a static gateway, development is simple:
+1. Clone: git clone https://github.com/Quantum-Cipher/Eternum369-Signal.git
+2. Run: Open index.html directly in your browser.
+All functional application code (swapping, data visualization, governance) is housed within the dedicated subdomain repositories.
