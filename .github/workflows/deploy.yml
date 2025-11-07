@@ -1,8 +1,8 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Swap Site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the main branch
   push:
     branches: ["main"]
 
@@ -29,14 +29,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+      - name: Upload Artifact (Root Directory)
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Uploads the entire repository root, where index.html is located
           path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
