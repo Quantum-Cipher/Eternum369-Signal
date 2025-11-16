@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitsune Riddle Generator - Eternum Blinkchain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#5D5CDE',
+                        'kitsune-orange': '#FF6B35',
+                        'kitsune-red': '#E63946',
+                        'sol-purple': '#9945FF',
+                        'sol-green': '#14F195',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'fadeIn': 'fadeIn 0.5s ease-in',
+                        'slideUp': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #FF6B35, 0 0 10px #FF6B35' },
+                            '100%': { boxShadow: '0 0 10px #FF6B35, 0 0 20px #FF6B35, 0 0 30px #FF6B35' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .fox-pattern {
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B35 0%, #E63946 50%, #9945FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blink-animation {
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FF6B35;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 3s ease-out forwards;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .markdown-content {
+            line-height: 1.6;
+        }
+
+        .markdown-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .markdown-content code {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
+
+        .dark .markdown-content code {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #FF6B35;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #E63946;
+        }
+
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+    <div class="fox-pattern min-h-screen">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-kitsune-orange via-kitsune-red to-sol-purple p-4 shadow-lg">
+            <div class="container mx-auto flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="text-4xl animate-float">🦊</div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold orbitron text-white">KITSUNE RIDDLE</h1>
+                        <p class="text-xs md:text-sm text-white/80 orbitron">Eternum Blinkchain • Solana Ready</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="hidden md:flex items-center gap-2 bg-black/20 px-3 py-1 rounded-full">
+                        <span class="blink-animation text-sol-green">●</span>
+                        <span class="text-white text-sm orbitron">LIVE</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8 max-w-4xl">
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 border-2 border-kitsune-orange/30">
+                    <div class="text-2xl md:text-3xl font-bold gradient-text orbitron" id="riddleCount">0</div>
+                    <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Riddles Solved</div>
+                </div>
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 border-2 border-sol-purple/30">
+                    <div class="text-2xl md:text-3xl font-bold gradient-text orbitron" id="blinkCount">0</div>
+                    <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Blinks Completed</div>
+                </div>
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 border-2 border-kitsune-red/30">
+                    <div class="text-2xl md:text-3xl font-bold gradient-text orbitron" id="streakCount">0</div>
+                    <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Current Streak</div>
+                </div>
+                <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 border-2 border-sol-green/30">
+                    <div class="text-2xl md:text-3xl font-bold gradient-text orbitron" id="chainStatus">READY</div>
+                    <div class="text-xs md:text-sm text-gray-600 dark:text-gray-400">Chain Status</div>
+                </div>
+            </div>
+
+            <!-- Riddle Generation Section -->
+            <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 mb-8 border-2 border-kitsune-orange/20 animate-fadeIn">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="text-3xl animate-float">🎴</div>
+                    <h2 class="text-2xl md:text-3xl font-bold gradient-text orbitron">Generate New Riddle</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Difficulty Level</label>
+                        <select id="difficulty" class="w-full px-4 py-3 text-base rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:border-kitsune-orange focus:ring-2 focus:ring-kitsune-orange/50 transition-all">
+                            <option value="easy">Easy - Novice Kitsune</option>
+                            <option value="medium" selected>Medium - Cunning Fox</option>
+                            <option value="hard">Hard - Ancient Spirit</option>
+                            <option value="legendary">Legendary - Nine-Tailed Master</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Riddle Theme (Optional)</label>
+                        <input type="text" id="theme" placeholder="e.g., blockchain, nature, technology..." class="w-full px-4 py-3 text-base rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:border-kitsune-orange focus:ring-2 focus:ring-kitsune-orange/50 transition-all">
+                    </div>
+
+                    <button id="generateBtn" class="w-full bg-gradient-to-r from-kitsune-orange via-kitsune-red to-sol-purple text-white font-bold py-4 px-6 rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 orbitron text-base md:text-lg flex items-center justify-center gap-2">
+                        <i class="fas fa-magic"></i>
+                        <span>GENERATE RIDDLE BLINK</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Riddle Display Section -->
+            <div id="riddleSection" class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 border-2 border-sol-purple/20 hidden animate-slideUp">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="text-3xl">🔮</div>
+                        <h2 class="text-2xl md:text-3xl font-bold gradient-text orbitron">Current Riddle</h2>
+                    </div>
+                    <div class="flex items-center gap-2 bg-kitsune-orange/20 px-3 py-1 rounded-full">
+                        <span class="blink-animation text-kitsune-orange">●</span>
+                        <span class="text-sm orbitron font-bold">BLINK ACTIVE</span>
+                    </div>
+                </div>
+
+                <div id="riddleContent" class="mb-6 p-6 bg-gradient-to-br from-kitsune-orange/10 to-sol-purple/10 rounded-lg border-l-4 border-kitsune-orange custom-scrollbar max-h-64 overflow-y-auto">
+                    <div id="riddleText" class="text-lg md:text-xl font-medium leading-relaxed markdown-content"></div>
+                </div>
+
+                <div id="riddleStatus" class="mb-4 text-center"></div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">Your Answer</label>
+                        <input type="text" id="answerInput" placeholder="Enter your answer..." class="w-full px-4 py-3 text-base rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:border-sol-purple focus:ring-2 focus:ring-sol-purple/50 transition-all">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button id="submitBtn" class="bg-gradient-to-r from-sol-purple to-sol-green text-white font-bold py-3 px-6 rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 orbitron flex items-center justify-center gap-2">
+                            <i class="fas fa-check"></i>
+                            <span>SUBMIT ANSWER</span>
+                        </button>
+                        <button id="hintBtn" class="bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold py-3 px-6 rounded-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 orbitron flex items-center justify-center gap-2">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>REQUEST HINT</span>
+                        </button>
+                    </div>
+
+                    <div id="hintSection" class="hidden p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg border-l-4 border-yellow-500">
+                        <div class="flex items-start gap-2">
+                            <i class="fas fa-lightbulb text-yellow-600 dark:text-yellow-400 mt-1"></i>
+                            <div id="hintText" class="text-sm text-gray-700 dark:text-gray-300 markdown-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div class="mt-8 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 border-2 border-sol-green/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="text-3xl">📜</div>
+                    <h2 class="text-2xl md:text-3xl font-bold gradient-text orbitron">Riddle Chain History</h2>
+                </div>
+                <div id="historyList" class="space-y-4 max-h-96 overflow-y-auto custom-scrollbar">
+                    <p class="text-gray-500 dark:text-gray-400 text-center py-8">No riddles solved yet. Begin your journey!</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-12 py-6 bg-gray-900/50 backdrop-blur-sm text-center text-white">
+            <p class="orbitron text-sm">⚡ Powered by Eternum Blinkchain • Built for Solana Ecosystem ⚡</p>
+            <p class="text-xs mt-2 opacity-70">Kitsune Riddle Generator v1.0 - dApp Ready</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dark mode setup
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // State management
+        const state = {
+            currentRiddle: null,
+            currentAnswer: null,
+            riddlesSolved: 0,
+            blinksCompleted: 0,
+            currentStreak: 0,
+            history: [],
+            isGenerating: false,
+            isChecking: false
+        };
+
+        // DOM elements
+        const generateBtn = document.getElementById('generateBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const hintBtn = document.getElementById('hintBtn');
+        const riddleSection = document.getElementById('riddleSection');
+        const riddleText = document.getElementById('riddleText');
+        const answerInput = document.getElementById('answerInput');
+        const riddleStatus = document.getElementById('riddleStatus');
+        const hintSection = document.getElementById('hintSection');
+        const hintText = document.getElementById('hintText');
+        const historyList = document.getElementById('historyList');
+
+        // Stats elements
+        const riddleCount = document.getElementById('riddleCount');
+        const blinkCount = document.getElementById('blinkCount');
+        const streakCount = document.getElementById('streakCount');
+        const chainStatus = document.getElementById('chainStatus');
+
+        // Create particles effect
+        function createParticles(x, y) {
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), 3000);
+            }
+        }
+
+        // Update stats display
+        function updateStats() {
+            riddleCount.textContent = state.riddlesSolved;
+            blinkCount.textContent = state.blinksCompleted;
+            streakCount.textContent = state.currentStreak;
+
+            if (state.blinksCompleted >= 10) {
+                chainStatus.textContent = 'PUMP!';
+                chainStatus.classList.add('blink-animation');
+            } else {
+                chainStatus.textContent = 'READY';
+                chainStatus.classList.remove('blink-animation');
+            }
+        }
+
+        // Show custom modal
+        function showModal(title, message, type = 'info') {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 animate-fadeIn';
+
+            const iconMap = {
+                success: '✅',
+                error: '❌',
+                info: 'ℹ️',
+                warning: '⚠️'
+            };
+
+            const colorMap = {
+                success: 'from-green-500 to-green-600',
+                error: 'from-red-500 to-red-600',
+                info: 'from-blue-500 to-blue-600',
+                warning: 'from-yellow-500 to-yellow-600'
+            };
+
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-2xl max-w-md w-full mx-4 animate-slideUp">
+                    <div class="text-center mb-4">
+                        <div class="text-5xl mb-3">${iconMap[type] || iconMap.info}</div>
+                        <h3 class="text-2xl font-bold gradient-text orbitron mb-2">${title}</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300 mb-6 text-center">${message}</p>
+                    <button class="w-full px-4 py-3 bg-gradient-to-r ${colorMap[type] || colorMap.info} text-white hover:shadow-lg rounded-lg orbitron font-bold transform hover:scale-105 transition-all" onclick="this.closest('.fixed').remove()">OK</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        // Poe API handler for riddle generation
+        window.Poe.registerHandler("riddle-generator", (result) => {
+            const msg = result.responses[0];
+
+            if (msg.status === "error") {
+                showModal('Error', 'Failed to generate riddle: ' + msg.statusText, 'error');
+                resetGenerateButton();
+            } else if (msg.status === "incomplete") {
+                riddleText.innerHTML = marked.parse(msg.content);
+            } else if (msg.status === "complete") {
+                state.currentRiddle = msg.content;
+                riddleText.innerHTML = marked.parse(msg.content);
+                riddleSection.classList.remove('hidden');
+                answerInput.value = '';
+                riddleStatus.innerHTML = '';
+                hintSection.classList.add('hidden');
+                resetGenerateButton();
+                state.blinksCompleted++;
+                updateStats();
+            }
+        });
+
+        // Poe API handler for answer checking
+        window.Poe.registerHandler("answer-checker", (result) => {
+            const msg = result.responses[0];
+
+            if (msg.status === "error") {
+                showModal('Error', 'Failed to check answer: ' + msg.statusText, 'error');
+                resetSubmitButton();
+            } else if (msg.status === "complete") {
+                const response = msg.content.toLowerCase();
+                const isCorrect = response.includes('correct') || response.includes('right') || response.includes('yes');
+
+                if (isCorrect) {
+                    state.riddlesSolved++;
+                    state.currentStreak++;
+                    state.history.unshift({
+                        riddle: state.currentRiddle,
+                        answer: answerInput.value,
+                        timestamp: new Date().toLocaleString(),
+                        correct: true
+                    });
+                    updateHistory();
+                    updateStats();
+
+                    riddleStatus.innerHTML = `
+                        <div class="p-4 bg-green-100 dark:bg-green-900/30 rounded-lg border-l-4 border-green-500 animate-slideUp">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-check-circle text-green-600 dark:text-green-400"></i>
+                                <span class="font-bold text-green-700 dark:text-green-300">CORRECT! Blink Verified ✨</span>
+                            </div>
+                        </div>
+                    `;
+
+                    // Create success effect
+                    const rect = submitBtn.getBoundingClientRect();
+                    createParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+                    setTimeout(() => {
+                        riddleSection.classList.add('hidden');
+                    }, 3000);
+                } else {
+                    state.currentStreak = 0;
+                    riddleStatus.innerHTML = `
+                        <div class="p-4 bg-red-100 dark:bg-red-900/30 rounded-lg border-l-4 border-red-500 animate-slideUp">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-times-circle text-red-600 dark:text-red-400"></i>
+                                <span class="font-bold text-red-700 dark:text-red-300">Incorrect. Try again!</span>
+                            </div>
+                        </div>
+                    `;
+                    updateStats();
+                }
+                resetSubmitButton();
+            }
+        });
+
+        // Poe API handler for hints
+        window.Poe.registerHandler("hint-generator", (result) => {
+            const msg = result.responses[0];
+
+            if (msg.status === "error") {
+                showModal('Error', 'Failed to generate hint: ' + msg.statusText, 'error');
+                resetHintButton();
+            } else if (msg.status === "incomplete") {
+                hintText.innerHTML = marked.parse(msg.content);
+                hintSection.classList.remove('hidden');
+            } else if (msg.status === "complete") {
+                hintText.innerHTML = marked.parse(msg.content);
+                hintSection.classList.remove('hidden');
+                resetHintButton();
+            }
+        });
+
+        // Generate riddle
+        generateBtn.addEventListener('click', async () => {
+            if (state.isGenerating) return;
+
+            state.isGenerating = true;
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GENERATING BLINK...';
+            generateBtn.disabled = true;
+
+            const difficulty = document.getElementById('difficulty').value;
+            const theme = document.getElementById('theme').value;
+
+            let prompt = `@Claude-Sonnet-4.5 Generate a creative and engaging riddle with ${difficulty} difficulty`;
+            if (theme.trim()) {
+                prompt += ` related to the theme: ${theme}`;
+            }
+            prompt += `. Format the riddle in a mysterious and engaging way. Keep it concise and clear.`;
+
+            try {
+                await window.Poe.sendUserMessage(prompt, {
+                    handler: "riddle-generator",
+                    stream: true,
+                    openChat: false
+                });
+            } catch (err) {
+                showModal('Error', err.message || 'Failed to generate riddle', 'error');
+                resetGenerateButton();
+            }
+        });
+
+        // Submit answer
+        submitBtn.addEventListener('click', async () => {
+            if (state.isChecking) return;
+
+            const answer = answerInput.value.trim();
+            if (!answer) {
+                showModal('Invalid Input', 'Please enter an answer before submitting.', 'warning');
+                return;
+            }
+
+            state.isChecking = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> VERIFYING...';
+            submitBtn.disabled = true;
+
+            const prompt = `@Claude-Sonnet-4.5 Check if this answer is correct for the riddle. Riddle: "${state.currentRiddle}" Answer: "${answer}". Respond with a simple yes or no, followed by a brief explanation. Provide ONLY plain text in your response with no code block formatting.`;
+
+            try {
+                await window.Poe.sendUserMessage(prompt, {
+                    handler: "answer-checker",
+                    stream: false,
+                    openChat: false
+                });
+            } catch (err) {
+                showModal('Error', err.message || 'Failed to check answer', 'error');
+                resetSubmitButton();
+            }
+        });
+
+        // Request hint
+        hintBtn.addEventListener('click', async () => {
+            const prompt = `@Claude-Sonnet-4.5 Provide a helpful hint for this riddle without giving away the answer: "${state.currentRiddle}". Keep the hint concise and cryptic.`;
+
+            hintBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GENERATING...';
+            hintBtn.disabled = true;
+
+            try {
+                await window.Poe.sendUserMessage(prompt, {
+                    handler: "hint-generator",
+                    stream: true,
+                    openChat: false
+                });
+            } catch (err) {
+                showModal('Error', err.message || 'Failed to generate hint', 'error');
+                resetHintButton();
+            }
+        });
+
+        // Enter key to submit
+        answerInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+
+        // Reset button states
+        function resetGenerateButton() {
+            state.isGenerating = false;
+            generateBtn.innerHTML = '<i class="fas fa-magic"></i> <span>GENERATE RIDDLE BLINK</span>';
+            generateBtn.disabled = false;
+        }
+
+        function resetSubmitButton() {
+            state.isChecking = false;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> <span>SUBMIT ANSWER</span>';
+            submitBtn.disabled = false;
+        }
+
+        function resetHintButton() {
+            hintBtn.innerHTML = '<i class="fas fa-lightbulb"></i> <span>REQUEST HINT</span>';
+            hintBtn.disabled = false;
+        }
+
+        // Update history
+        function updateHistory() {
+            if (state.history.length === 0) {
+                historyList.innerHTML = '<p class="text-gray-500 dark:text-gray-400 text-center py-8">No riddles solved yet. Begin your journey!</p>';
+                return;
+            }
+
+            historyList.innerHTML = state.history.map((item, index) => `
+                <div class="p-4 bg-gradient-to-r from-kitsune-orange/10 to-sol-purple/10 rounded-lg border-l-4 ${item.correct ? 'border-green-500' : 'border-red-500'} animate-slideUp">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">${item.correct ? '✅' : '❌'}</span>
+                            <span class="font-bold orbitron text-sm">Blink #${state.history.length - index}</span>
+                        </div>
+                        <span class="text-xs text-gray-500 dark:text-gray-400">${item.timestamp}</span>
+                    </div>
+                    <p class="text-sm text-gray-700 dark:text-gray-300 mb-2"><strong>Riddle:</strong> ${item.riddle.substring(0, 100)}...</p>
+                    <p class="text-sm text-gray-700 dark:text-gray-300"><strong>Answer:</strong> ${item.answer}</p>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        updateStats();
+    </script>
+</body>
+</html>
