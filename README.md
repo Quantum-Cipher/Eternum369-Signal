@@ -1,3 +1,16 @@
+# 🚀 Live Surge Deployments
+
+This repository and its sub-folders are deployed to the following live URLs:
+
+* **Main Gateway:** [https://eternum-gateway.surge.sh](https://eternum-gateway.surge.sh)
+* **Mythosblock:** [https://eternum-mythosblock.surge.sh](https://eternum-mythosblock.surge.sh)
+* **Nexus:** [https://eternum-nexus.surge.sh](https://eternum-nexus.surge.sh)
+* **Signal:** [https://eternum-signal.surge.sh](https://eternum-signal.surge.sh)
+* **Swap:** [https://eternum-swap.surge.sh](https://eternum-swap.surge.sh)
+* **Infographic:** [https://eternum-infographic.surge.sh](https://eternum-infographic.surge.sh)
+
+---
+
 🪐 ETERNUM369 - The Liquidity Nexus Gateway 
 
 🌌 This repository (Quantum-Cipher/Eternum369-Signal) serves as the Primary Landing Page and Gateway for the entire Eternum Liquidity Nexus ecosystem. Its sole purpose is to onboard users and direct them to the core decentralized applications (dApps) hosted on our dedicated subdomains.
