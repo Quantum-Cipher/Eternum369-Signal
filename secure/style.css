@@ -1,0 +1,75 @@
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  /* Simple star background effect */
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+  background-size: 550px 550px, 350px 350px, 250px 250px;
+  background-position: 0 0, 40px 60px, 130px 270px;
+}
+
+.content-wrapper {
+  text-align: center;
+  background: rgba(20, 20, 30, 0.9);
+  padding: 3rem;
+  border-radius: 15px;
+  border: 1px solid #333;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+}
+
+nav {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}
+
+nav a {
+  color: #888;
+  margin: 0 15px;
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: color 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav a:hover {
+  color: #ff8c00;
+  text-shadow: 0 0 5px #ff8c00;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+button {
+  background: #1a1a1a;
+  color: #ff8c00;
+  border: 1px solid #ff8c00;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+button:hover {
+  background: #ff8c00;
+  color: black;
+  box-shadow: 0 0 15px #ff8c00;
+  transform: translateY(-2px);
+}
