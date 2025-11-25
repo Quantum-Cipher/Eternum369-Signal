@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternum: Secure Biological Data Framework</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
+        .container { width: 80%; margin: 40px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        header { border-bottom: 3px solid #2c3e50; padding-bottom: 20px; margin-bottom: 30px; text-align: center; }
+        h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 5px; }
+        h2 { color: #34495e; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 30px; }
+        h3 { color: #7f8c8d; margin-top: 25px; }
+        p, li { margin-bottom: 15px; }
+        .cta-button { display: inline-block; background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold; transition: background-color 0.3s; }
+        .cta-button:hover { background-color: #0056b3; }
+        nav a { margin: 0 15px; text-decoration: none; color: #2c3e50; font-weight: 600; }
+        nav { text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ETERNuM: Secure Biological Data Framework</h1>
+            <p>Immutability, Confidentiality, and Compliance for Research.</p>
+            <nav>
+                <a href="index.html">Vision</a>
+                <a href="architecture.html">Architecture</a>
+                <a href="data_chain.html">Data Security</a>
+                <a href="watermark.html">Watermark App</a>
+            </nav>
+        </header>
+
+        <h2>Hosting Sensitive Biological Data On-Chain</h2>
+        <p>Eternum's primary utility is providing a **secure, auditable, and decentralized framework** for hosting and sharing sensitive biological datasets for advanced research. We utilize a **hybrid storage model** to achieve integrity without sacrificing performance or confidentiality.</p>
+        
+        <h3>The Secure On-Chain / Off-Chain Architecture</h3>
+        <ol>
+            <li><strong>Off-Chain Storage (IPFS/Decentralized Cloud):</strong> The large, raw biological data files (e.g., genomic sequences, mycelial mapping data) are stored securely off-chain in an encrypted state using decentralized storage (like IPFS or a specialized data cloud).</li>
+            <li><strong>On-Chain Metadata & Proofs (Mythosblock):</strong> Only the following information is stored on the immutable Mythosblock ledger:
+                <ul>
+                    <li>**Encrypted Hash:** A cryptographic hash of the off-chain data, serving as immutable proof of its integrity.</li>
+                    <li>**Zodiacal Key:** The unique, multi-layered origin and verification key.</li>
+                    <li>**Access Control Smart Contract:** A smart contract that holds the encrypted pointers and defines the access policies (e.g., who, when, and under what zero-knowledge condition a researcher can decrypt the data).</li>
+                </ul>
+            </li>
+            <li>**Homomorphic Encryption & ZKPs:** We utilize advanced cryptographic mechanisms, including **Homomorphic Encryption** (allowing computation on encrypted data) and **Zero-Knowledge Proofs (ZKPs)** (allowing researchers to prove a discovery without ever decrypting the raw data), to ensure compliance and patient privacy.</li>
+        </ol>
+
+        <h2>Compliance and Future-Proofing</h2>
+        <p>This architecture is specifically designed to meet or exceed global regulatory standards (e.g., HIPAA, GDPR for related data types) by never exposing the raw data on the public ledger and enforcing access only through immutable smart contracts. This security and compliance layer is a massive value differentiator for institutional partners.</p>
+        
+        <p style="text-align:center; margin-top: 40px;">
+            <a href="index.html" class="cta-button" style="background-color: #007bff;">Return to The Nexus Vision</a>
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+# --- 1. CREATE ROOT DIRECTORY AND FOLDER STRUCTURE ---
+echo "🔮 1. Creating Monorepo Root and Folders..."
+mkdir eternum369-monorepo
+cd eternum369-monorepo
+
+mkdir packages mkdir -p packages/web/css mkdir -p packages/web/js mkdir -p 
+packages/contracts
+
