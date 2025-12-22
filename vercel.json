@@ -1,18 +1,5 @@
-echo "📄 Creating vercel.json for deployment rules..."
-cat << 'EOF' > vercel.json
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "packages/web/*.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    { "src": "/", "dest": "/packages/web/index.html" },
-    { "src": "/architecture", "dest": "/packages/web/architecture.html" },
-    { "src": "/data_chain", "dest": "/packages/web/data_chain.html" },
-    { "src": "/watermark", "dest": "/packages/web/watermark.html" }
-  ]
+  "public": true,
+  "cleanUrls": true
 }
-EOF
