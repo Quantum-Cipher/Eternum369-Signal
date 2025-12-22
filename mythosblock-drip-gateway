@@ -1,0 +1,28 @@
+cat > README.md << 'EOF'
+# 🦊 ETERNUM369-SIGNAL | Mythosblock Gateway
+
+![Vercel Deployment](https://img.shields.io/badge/Vercel-Production-black?logo=vercel)
+![Infrastructure](https://img.shields.io/badge/Network-Base_Sepolia-blue)
+![Identity](https://img.shields.io/badge/Identity-Kitsune-orange)
+
+## 🏛️ Overview
+The **Mythosblock Drip Gateway** is the primary visualization and coordination layer for the Eternum network. It serves as a high-speed interface for monitoring testnet traffic and managing faucet distribution across the "Shadow Node" infrastructure.
+
+## 🛠️ Tech Stack
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Visualization:** [Chart.js](https://www.chartjs.org/) via `react-chartjs-2`
+- **Deployment:** [Vercel Edge Network](https://vercel.com/)
+- **Email:** [Zoho Mail](https://zoho.com/mail) (Secure Identity: kitsune@mythosblock.com)
+
+## 📊 Dashboard Components
+- **Live Testnet Traffic:** Real-time distribution visualization of faucet requests.
+- **Identity Layer:** Professional mail-exchange (MX) routing via Zoho.
+- **Data Source:** `public/drip-stats.json` (Automated JSON pipe).
+
+## 🚀 Terminal Deployment
+To deploy updates to the production gateway:
+```zsh
+git add .
+git commit -m "update: sync gateway pulse"
+git push origin main
+vercel --prod --scope eternum-shadownode
