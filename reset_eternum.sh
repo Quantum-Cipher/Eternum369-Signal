@@ -1,18 +1,19 @@
 #!/bin/bash
-set -e # Exit immediately if a command fails
+set -euo pipefail # Exit on error, unset variable, or pipe failure
 
 echo "🛑 INITIATING HARD RESET OF ETERNUM PROTOCOL..."
 
 # 1. CLEANUP (Remove existing folder if it exists to avoid conflicts)
-if [ -d "eternum369-monorepo" ]; then
+MONOREPO_DIR="eternum369-monorepo"
+if [ -d "${MONOREPO_DIR}" ]; then
     echo "🗑️  Removing existing monorepo directory..."
-    rm -rf eternum369-monorepo
+    rm -rf -- "${MONOREPO_DIR}"
 fi
 
 # 2. CREATE ROOT STRUCTURE
 echo "🏗️  Constructing new Monorepo Architecture..."
-mkdir eternum369-monorepo
-cd eternum369-monorepo
+mkdir -- "${MONOREPO_DIR}"
+cd -- "${MONOREPO_DIR}"
 
 # Create Package Directories
 mkdir -p packages/web/css
@@ -452,4 +453,3 @@ EOF
 echo "✅ ETERNUM RESET COMPLETE."
 echo "📁 Your clean monorepo is ready in: eternum369-monorepo"
 echo "👉 To deploy with Vercel: Run 'vercel' inside the root folder."
-EOF
