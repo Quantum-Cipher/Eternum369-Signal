@@ -13,7 +13,7 @@ fi
 # 2. CREATE ROOT STRUCTURE
 echo "🏗️  Constructing new Monorepo Architecture..."
 mkdir -- "${MONOREPO_DIR}"
-cd -- "${MONOREPO_DIR}"
+cd -- "${MONOREPO_DIR}" || { echo "ERROR: Failed to enter ${MONOREPO_DIR}"; exit 1; }
 
 # Create Package Directories
 mkdir -p packages/web/css
