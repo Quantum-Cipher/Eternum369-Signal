@@ -1,6 +1,12 @@
-# 🚀 Live Surge Deployments
+# 🚀 Live Deployments
 
 This repository and its sub-folders are deployed to the following live URLs:
+
+## Vercel
+
+* **Mythosblock Gateway:** [https://mythos-gateway.vercel.app](https://mythos-gateway.vercel.app)
+
+## Surge
 
 * **Main Gateway:** [https://eternum-gateway.surge.sh](https://eternum-gateway.surge.sh)
 * **Mythosblock:** [https://eternum-mythosblock.surge.sh](https://eternum-mythosblock.surge.sh)
