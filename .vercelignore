@@ -1,0 +1,8 @@
+.git
+.github
+node_modules
+package-lock.json
+reset_eternum.sh
+surge-deploys.md
+Liscense
+eternum369-monorepo
